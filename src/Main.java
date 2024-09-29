@@ -20,7 +20,9 @@ public class Main {
 
         System.out.println("Digite a renda Mensal: ");
         double rendaMensal = scanner.nextDouble();
+        List compraList = new ArrayList<Extrato>();
         
+
         Cartao conta = new Cartao(nome, saldo, numeroCartao, rendaMensal);
 
 
@@ -48,30 +50,41 @@ public class Main {
                             System.out.println("Digite o valor que deseja sacar: ");
                             double saque = scanner.nextDouble();
 
-                            conta.sacar(saque);
+                            conta.sacarPagar(saque);
 
                             Extrato extrato = new Extrato("Saque",saque);
                             System.out.println("Termina de criar o EXTRATO OBJETO");
                             conta.inserirExtrato(extrato);
                             System.out.println("Começa a mostrar o Extrato");
                             conta.mostrarExtrato();
-                            conta.toString();
+                            System.out.println(conta.toString()); 
                             break;
                           
                         case 2:
-                            System.out.println("""
-                                    Sapato: 300 reais
-    
-                                    camisa: 420
-    
-                                    computador: 2500
-                                    """);
-    
+                            System.out.println("Qual o produto: ");
+                            String produto = scanner.next();
+
+                            System.out.println("Digite o valor: ");
+                            double preco = scanner.nextDouble();
+                            System.out.println("Digite a forma de pagamento \n 1- Credito \n 2- Debito");
+                            int opcao = scanner.nextInt();
+                            if (opcao == 1) {
+                                conta.credito(preco);
+                            }else if (opcao == 2) {
+                                conta.sacarPagar(preco);
+                            }else{
+                                System.out.println("Opção inválida");
+                            }
+                            Extrato compra = new Extrato(produto, preco);
+                            conta.inserirExtrato(compra);
+                            conta.mostrarExtrato();
+                            System.out.println(conta.toString()); 
                             break;
     
                         case 3:
                         System.out.println("Digite o valor do deposito: ");
                             conta.depositar(scanner.nextDouble());
+                            System.out.println(conta.toString());
                             break;
     
                         case 4:

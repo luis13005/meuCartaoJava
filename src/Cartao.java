@@ -41,17 +41,19 @@ public class Cartao {
     }
 
     public void inserirExtrato(Extrato extrato){
-        System.out.println("Começa a inserir o Extrato");
         this.extrato.add(extrato);
-        System.out.println("Termina de inserir o Extrato");
     }
 
     public void mostrarExtrato(){
         System.out.println(extrato);
     }
 
-    public void sacar(double sacar){
+    public void sacarPagar(double sacar){
         this.saldo -= sacar;
+    }
+
+    public void credito(double preco){
+        this.credito -= preco;
     }
 
     public void depositar(double deposito){
