@@ -24,57 +24,67 @@ public class Main {
         Cartao conta = new Cartao(nome, saldo, numeroCartao, rendaMensal);
 
 
-        conta.mostrarInfo();
+            int decisao = 0;
 
-        System.out.println("""
-                *********************************
-                1- Sacar dinheiro
+                while (decisao != 6) {
+                                System.out.println("""
+                            *********************************
+                            1- Sacar dinheiro
 
-                2- Comprar itens
+                            2- Comprar itens
 
-                3- Depositar dinheiro
+                            3- Depositar dinheiro
 
-                4- Pagar Fatura
+                            4- Pagar Fatura
 
-                5- Checar valor da Fatura
-                *********************************
-                """);
+                            5- Checar valor da Fatura
 
+                            6- Encerrar
+                            *********************************
+                            """);
+                    decisao = scanner.nextInt();
+                    switch (decisao) {
+                        case 1:
+                            System.out.println("Digite o valor que deseja sacar: ");
+                            double saque = scanner.nextDouble();
 
-                int decisao = scanner.nextInt();
+                            conta.sacar(saque);
 
-                switch (decisao) {
-                    case 1:
-                        System.out.println("Digite o valor que deseja sacar: ");
-                        conta.sacar(scanner.nextDouble());
-                        break;
-                      
-                    case 2:
-                        System.out.println("""
-                                Sapato: 300 reais
-
-                                camisa: 420
-
-                                computador: 2500
-                                """);
-
-                        break;
-
-                    case 3:
-                    System.out.println("Digite o valor do deposito: ");
-                        conta.depositar(scanner.nextDouble());
-                        break;
-
-                    case 4:
-                        
-                        break;
-
-                    case 5:
-                        
-                        break;
-                
-                    default:
-                        break;
+                            Extrato extrato = new Extrato("Saque",saque);
+                            System.out.println("Termina de criar o EXTRATO OBJETO");
+                            conta.inserirExtrato(extrato);
+                            System.out.println("Começa a mostrar o Extrato");
+                            conta.mostrarExtrato();
+                            conta.toString();
+                            break;
+                          
+                        case 2:
+                            System.out.println("""
+                                    Sapato: 300 reais
+    
+                                    camisa: 420
+    
+                                    computador: 2500
+                                    """);
+    
+                            break;
+    
+                        case 3:
+                        System.out.println("Digite o valor do deposito: ");
+                            conta.depositar(scanner.nextDouble());
+                            break;
+    
+                        case 4:
+                            
+                            break;
+    
+                        case 5:
+                            
+                            break;
+                    
+                        default:
+                            break;
+                    }
                 }
         }
     }

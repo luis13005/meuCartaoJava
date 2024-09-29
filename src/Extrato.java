@@ -14,4 +14,9 @@ public class Extrato {
     public double getValor(){
         return this.valor;
     }
+
+    @Override
+    public String toString() {
+        return "********Extrato********\nTipo: "+this.descricao +" Valor: "+this.valor;
+    }
 }

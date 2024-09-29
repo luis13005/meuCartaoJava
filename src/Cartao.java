@@ -11,6 +11,26 @@ public class Cartao {
     private double rendaMensal;
     private List<Extrato> extrato; 
 
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public double getCredito() {
+        return credito;
+    }
+   
+    public double getFatura() {
+        return fatura;
+    }
+
+    public int getNumeroCartao() {
+        return numeroCartao;
+    }
+
+    public double getRendaMensal() {
+        return rendaMensal;
+    }
+
     public Cartao(String nomeTitular,double saldoConta,int numeroCartao,double rendaMensal){
         this.titular = nomeTitular.toUpperCase();
         this.saldo = saldoConta;
@@ -20,20 +40,14 @@ public class Cartao {
         this.extrato = new ArrayList<>();
     }
 
-    public void mostrarInfo(){
-        System.out.printf("""
-                Titular: %s
+    public void inserirExtrato(Extrato extrato){
+        System.out.println("Começa a inserir o Extrato");
+        this.extrato.add(extrato);
+        System.out.println("Termina de inserir o Extrato");
+    }
 
-                Saldo: %.2f
-
-                Numero do Cartão: %d
-
-                Renda Mensal: %.2f
-
-                Credito: %.2f
-
-                Fatura: %.2f
-                """,this.titular,this.saldo,this.numeroCartao,this.rendaMensal,this.credito,this.fatura);
+    public void mostrarExtrato(){
+        System.out.println(extrato);
     }
 
     public void sacar(double sacar){
@@ -42,5 +56,15 @@ public class Cartao {
 
     public void depositar(double deposito){
         this.saldo += deposito;
+    }
+
+    @Override
+    public String toString() {
+        return "Titular: "+this.titular+"\n"+
+            "Saldo: "+this.saldo+"\n"+
+            "Numero do Cartão: "+this.numeroCartao+"\n"+
+            "Renda Mensal: "+this.rendaMensal+"\n"+
+            "Credito: "+this.credito+"\n"+
+            "Fatura: "+this.fatura+"\n";
     }
 }
