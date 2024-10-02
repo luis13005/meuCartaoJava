@@ -54,6 +54,7 @@ public class Cartao {
 
     public void credito(double preco){
         this.credito -= preco;
+        this.fatura = this.credito - this.rendaMensal;
     }
 
     public void depositar(double deposito){
