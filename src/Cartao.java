@@ -54,11 +54,27 @@ public class Cartao {
 
     public void credito(double preco){
         this.credito -= preco;
-        this.fatura = this.credito - this.rendaMensal;
+        this.fatura += preco;
     }
 
     public void depositar(double deposito){
         this.saldo += deposito;
+    }
+
+    public boolean pagarFatura(boolean exito){
+        if (this.getSaldo() >= this.getFatura()) {
+            System.out.println(this.getSaldo());
+            this.saldo -= this.getFatura();
+
+            this.fatura = 0;
+            System.out.println(this.getSaldo());
+            exito = true;
+            System.out.println("exito "+exito);
+            return exito;
+        }else{
+            exito = false;
+            return exito;
+        }
     }
 
     @Override

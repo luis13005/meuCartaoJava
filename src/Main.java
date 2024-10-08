@@ -88,7 +88,18 @@ public class Main {
                             break;
     
                         case 4:
-                            
+                        System.out.printf("%.2f R$ Deseja pagar a fatura?\n 1-SIM\n 2-Não ",conta.getFatura());
+                            int fatura = scanner.nextInt();
+                            if (fatura == 1) {
+                                boolean exito = false;
+                                conta.pagarFatura(exito);
+                                    System.out.println("Saida exito "+exito);
+                                if (exito == true) {
+                                    System.out.printf("Fatura paga com sucesso saldo atual: %.2f R$",conta.getSaldo());
+                                }else{
+                                    System.out.printf("Pagamento falhou saldo atual: %.2f R$",conta.getSaldo());
+                                }
+                            }
                             break;
     
                         case 5:
