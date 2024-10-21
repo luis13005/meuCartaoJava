@@ -48,8 +48,15 @@ public class Cartao {
         System.out.println(extrato);
     }
 
-    public void sacarPagar(double sacar){
-        this.saldo -= sacar;
+    public boolean sacarPagar(double sacar,boolean erro){
+        if (sacar <= this.saldo) {
+            this.saldo -= sacar;
+            erro = false;
+            return erro;
+        }else{
+            erro = true;
+            return erro;
+        }
     }
 
     public void credito(double preco){

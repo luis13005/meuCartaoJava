@@ -22,6 +22,7 @@ public class Main {
         double rendaMensal = scanner.nextDouble();
         List compraList = new ArrayList<Extrato>();
         
+        boolean erro = false;
 
         Cartao conta = new Cartao(nome, saldo, numeroCartao, rendaMensal);
 
@@ -30,6 +31,7 @@ public class Main {
 
                 while (decisao != 6) {
                                 System.out.println("""
+
                             *********************************
                             1- Sacar dinheiro
 
@@ -37,9 +39,9 @@ public class Main {
 
                             3- Depositar dinheiro
 
-                            4- Pagar Fatura
+                            4- Checar valor da Fatura
 
-                            5- Checar valor da Fatura
+                            5- Pagar Fatura
 
                             6- Encerrar
                             *********************************
@@ -50,14 +52,21 @@ public class Main {
                             System.out.println("Digite o valor que deseja sacar: ");
                             double saque = scanner.nextDouble();
 
-                            conta.sacarPagar(saque);
+                            
+                            
+                            erro = conta.sacarPagar(saque,erro);
 
-                            Extrato extrato = new Extrato("Saque",saque);
-                            System.out.println("Termina de criar o EXTRATO OBJETO");
-                            conta.inserirExtrato(extrato);
-                            System.out.println("Começa a mostrar o Extrato");
-                            conta.mostrarExtrato();
-                            System.out.println(conta.toString()); 
+                            if (erro==false) {
+                                Extrato extrato = new Extrato("Saque",saque);
+                            
+                                conta.inserirExtrato(extrato);
+            
+                                conta.mostrarExtrato();
+                                System.out.println(conta.toString()); 
+                            }else{
+                                System.out.println("Saque falhou");
+                            }
+                          
                             break;
                           
                         case 2:
@@ -71,14 +80,20 @@ public class Main {
                             if (opcao == 1) {
                                 conta.credito(preco);
                             }else if (opcao == 2) {
-                                conta.sacarPagar(preco);
+                                
+                                erro = conta.sacarPagar(preco,erro);
                             }else{
                                 System.out.println("Opção inválida");
                             }
-                            Extrato compra = new Extrato(produto, preco);
-                            conta.inserirExtrato(compra);
-                            conta.mostrarExtrato();
-                            System.out.println(conta.toString()); 
+
+                            if (erro==false) {
+                                Extrato compra = new Extrato(produto, preco);
+                                conta.inserirExtrato(compra);
+                                conta.mostrarExtrato();
+                                System.out.println(conta.toString()); 
+                            }else{
+                                System.out.println("Compra falhou");
+                            }
                             break;
     
                         case 3:
@@ -88,11 +103,15 @@ public class Main {
                             break;
     
                         case 4:
+                            System.out.println(conta.getFatura()); 
+                            break;
+
+                            case 5:
                         System.out.printf("%.2f R$ Deseja pagar a fatura?\n 1-SIM\n 2-Não ",conta.getFatura());
                             int fatura = scanner.nextInt();
                             if (fatura == 1) {
                                 boolean exito = false;
-                                conta.pagarFatura(exito);
+                                exito = conta.pagarFatura(exito);
                                     System.out.println("Saida exito "+exito);
                                 if (exito == true) {
                                     System.out.printf("Fatura paga com sucesso saldo atual: %.2f R$",conta.getSaldo());
@@ -100,10 +119,6 @@ public class Main {
                                     System.out.printf("Pagamento falhou saldo atual: %.2f R$",conta.getSaldo());
                                 }
                             }
-                            break;
-    
-                        case 5:
-                            
                             break;
                     
                         default:
