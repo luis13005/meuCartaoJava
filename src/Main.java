@@ -69,9 +69,12 @@ public class Main {
                           
                         case 2:
                             System.out.println("Qual o produto: ");
+                            
+                            String produto = "";
+                            while(produto.isEmpty()){
+                                produto = scanner.nextLine();
+                            }
 
-                            String produto = scanner.next();
-                  
                             System.out.println("Digite o valor: ");
                             double preco = scanner.nextDouble();
                            
