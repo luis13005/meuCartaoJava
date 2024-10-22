@@ -29,7 +29,7 @@ public class Main {
 
             int decisao = 0;
 
-                while (decisao != 6) {
+                while (decisao != 7) {
                                 System.out.println("""
 
                             *********************************
@@ -43,7 +43,9 @@ public class Main {
 
                             5- Pagar Fatura
 
-                            6- Encerrar
+                            6- Extrato
+
+                            7- Encerrar
                             *********************************
                             """);
                     decisao = scanner.nextInt();
@@ -54,14 +56,10 @@ public class Main {
 
                             
                             
-                            erro = conta.sacarPagar(saque,erro);
+                            erro = conta.sacar(saque,erro);
 
                             if (erro==false) {
-                                Extrato extrato = new Extrato("Saque",saque);
-                            
-                                conta.inserirExtrato(extrato);
-            
-                                conta.mostrarExtrato();
+                                // conta
                                 System.out.println(conta.toString()); 
                             }else{
                                 System.out.println("Saque falhou");
@@ -71,29 +69,32 @@ public class Main {
                           
                         case 2:
                             System.out.println("Qual o produto: ");
-                            String produto = scanner.next();
 
+                            String produto = scanner.next();
+                  
                             System.out.println("Digite o valor: ");
                             double preco = scanner.nextDouble();
+                           
+
                             System.out.println("Digite a forma de pagamento \n 1- Credito \n 2- Debito");
                             int opcao = scanner.nextInt();
+
+                            
                             if (opcao == 1) {
                                 conta.credito(preco);
                             }else if (opcao == 2) {
                                 
-                                erro = conta.sacarPagar(preco,erro);
+                                erro = conta.compra(preco,erro);
                             }else{
                                 System.out.println("Opção inválida");
                             }
 
                             if (erro==false) {
-                                Extrato compra = new Extrato(produto, preco);
-                                conta.inserirExtrato(compra);
-                                conta.mostrarExtrato();
                                 System.out.println(conta.toString()); 
                             }else{
                                 System.out.println("Compra falhou");
                             }
+        
                             break;
     
                         case 3:
@@ -120,7 +121,12 @@ public class Main {
                                 }
                             }
                             break;
-                    
+                            
+                            case 6:
+
+                                conta.mostrarExtrato();
+                            break;
+
                         default:
                             break;
                     }

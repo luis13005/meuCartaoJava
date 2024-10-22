@@ -17,7 +17,6 @@ public class Extrato {
 
     @Override
     public String toString() {
-        return "********Extrato********\nTipo: "+this.descricao +" Valor: "+this.valor+
-        "\n********Extrato********";
+        return "\n"+this.descricao +" Valor: "+this.valor;
     }
 }

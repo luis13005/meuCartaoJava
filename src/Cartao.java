@@ -40,17 +40,37 @@ public class Cartao {
         this.extrato = new ArrayList<>();
     }
 
-    public void inserirExtrato(Extrato extrato){
+    private void inserirExtrato(String chave,double valor){
+        Extrato extrato = new Extrato(chave, valor);
         this.extrato.add(extrato);
     }
 
     public void mostrarExtrato(){
-        System.out.println(extrato);
+                 
+                    System.out.println("*************Extrato*************\n"+this.extrato+ "\n" + //
+                                                "*************Extrato*************\n");
     }
 
-    public boolean sacarPagar(double sacar,boolean erro){
+    public boolean sacar(double sacar,boolean erro){
         if (sacar <= this.saldo) {
             this.saldo -= sacar;
+            erro = false;
+
+            String chave = "Saque";
+            this.inserirExtrato(chave, sacar);
+
+            return erro;
+        }else{
+            erro = true;
+            return erro;
+        }
+    }
+
+    public boolean compra(double sacar,boolean erro){
+        if (sacar <= this.saldo) {
+            this.saldo -= sacar;
+            String chave = "Compra Debito";
+            this.inserirExtrato(chave, sacar);
             erro = false;
             return erro;
         }else{
@@ -62,10 +82,15 @@ public class Cartao {
     public void credito(double preco){
         this.credito -= preco;
         this.fatura += preco;
+        String chave = "Compra Credito";
+            this.inserirExtrato(chave, preco);
     }
 
     public void depositar(double deposito){
         this.saldo += deposito;
+        
+        String chave = "Deposito";
+        this.inserirExtrato(chave, deposito);
     }
 
     public boolean pagarFatura(boolean exito){
@@ -73,10 +98,12 @@ public class Cartao {
             System.out.println(this.getSaldo());
             this.saldo -= this.getFatura();
 
-            this.fatura = 0;
-            System.out.println(this.getSaldo());
             exito = true;
-            System.out.println("exito "+exito);
+            
+            String chave = "Pagamento da Fatura";
+            this.inserirExtrato(chave, this.getFatura());
+
+            this.fatura = 0;
             return exito;
         }else{
             exito = false;
